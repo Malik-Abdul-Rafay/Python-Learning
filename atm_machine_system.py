@@ -31,7 +31,8 @@ atm_data = {
     },
 }
 
-
+card_correct = False
+password_correct = False
 
 try:
     user_card_num_input = input('Enter Your Card Number: ')
@@ -40,8 +41,10 @@ except RuntimeError as e:
 
 for key , data in atm_data.items():
     if key == user_card_num_input:
+        card_correct = True
         user_password = input("Enter ATM password: ")
         if data["password"] == user_password:
+            password_correct = True
             print("Correct Password")
             print("""Please Choose Option:
             a. Balance Check Karen
@@ -59,7 +62,7 @@ for key , data in atm_data.items():
                         user_doposit_value = int(input('Enter Deposit Amount: '))
                     except RuntimeError as e:
                         print(e)
-                    if(user_doposit_value):
+                    if user_doposit_value:
                         data["balance"] += user_doposit_value
                         print('Deposit Successfully!')
                     else:
@@ -83,3 +86,9 @@ for key , data in atm_data.items():
             
 
 
+if not card_correct:
+    print("Card Number Incorrect")
+elif not password_correct:
+    print("Password Incorrect")
+else:
+    print("Dya Kuch Gar Bar hai")
